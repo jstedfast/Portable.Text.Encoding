@@ -434,25 +434,25 @@ namespace Portable.Text
 			}
 
 			do {
-			dest [0] = src [1];
-			dest [1] = src [0];
-			dest [2] = src [3];
-			dest [3] = src [2];
-			dest [4] = src [5];
-			dest [5] = src [4];
-			dest [6] = src [7];
-			dest [7] = src [6];
-			dest [8] = src [9];
-			dest [9] = src [8];
-			dest [10] = src [11];
-			dest [11] = src [10];
-			dest [12] = src [13];
-			dest [13] = src [12];
-			dest [14] = src [15];
-			dest [15] = src [14];
-			dest += 16;
-			src += 16;
-			count -= 16;
+				dest[0] = src[1];
+				dest[1] = src[0];
+				dest[2] = src[3];
+				dest[3] = src[2];
+				dest[4] = src[5];
+				dest[5] = src[4];
+				dest[6] = src[7];
+				dest[7] = src[6];
+				dest[8] = src[9];
+				dest[9] = src[8];
+				dest[10] = src[11];
+				dest[11] = src[10];
+				dest[12] = src[13];
+				dest[13] = src[12];
+				dest[14] = src[15];
+				dest[15] = src[14];
+				dest += 16;
+				src += 16;
+				count -= 16;
 			} while ((count & unchecked ((int) 0xFFFFFFF0)) != 0);
 
 			switch (count) {
@@ -474,34 +474,36 @@ namespace Portable.Text
 				goto Count4;
 			}
 
-			Count8:;
-			dest [0] = src [1];
-			dest [1] = src [0];
-			dest [2] = src [3];
-			dest [3] = src [2];
-			dest [4] = src [5];
-			dest [5] = src [4];
-			dest [6] = src [7];
-			dest [7] = src [6];
+			Count8:
+			dest[0] = src[1];
+			dest[1] = src[0];
+			dest[2] = src[3];
+			dest[3] = src[2];
+			dest[4] = src[5];
+			dest[5] = src[4];
+			dest[6] = src[7];
+			dest[7] = src[6];
 			dest += 8;
 			src += 8;
 
 			if ((count & 4) == 0)
 				goto TestCount2;
-			Count4:;
-			dest [0] = src [1];
-			dest [1] = src [0];
-			dest [2] = src [3];
-			dest [3] = src [2];
+
+			Count4:
+			dest[0] = src[1];
+			dest[1] = src[0];
+			dest[2] = src[3];
+			dest[3] = src[2];
 			dest += 4;
 			src += 4;
 
-			TestCount2:;
+			TestCount2:
 			if ((count & 2) == 0)
 				return;
-			Count2:;
-			dest [0] = src [1];
-			dest [1] = src [0];
+
+			Count2:
+			dest[0] = src[1];
+			dest[1] = src[0];
 		}
 
 		// Unicode decoder implementation.
@@ -568,9 +570,9 @@ namespace Portable.Text
 
 				if (leftOver != -1) {
 					if (bigEndian)
-						chars [charIndex] = unchecked ((char) ((leftOver << 8) | (int) bytes [byteIndex]));
+						chars[charIndex] = unchecked ((char) ((leftOver << 8) | (int) bytes [byteIndex]));
 					else
-						chars [charIndex] = unchecked ((char) (((int) bytes [byteIndex] << 8) | leftOver));
+						chars[charIndex] = unchecked ((char) (((int) bytes [byteIndex] << 8) | leftOver));
 
 					charIndex++;
 					byteIndex++;
