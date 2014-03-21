@@ -44,9 +44,9 @@ namespace Portable.Text
 			return new DecoderExceptionFallbackBuffer ();
 		}
 
-		public override bool Equals (object value)
+		public override bool Equals (object obj)
 		{
-			return (value is DecoderExceptionFallback);
+			return (obj is DecoderExceptionFallback);
 		}
 
 		public override int GetHashCode ()

@@ -191,9 +191,12 @@ namespace Portable.Text
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
+
 			if (count == 0)
 				return 0;
+
 			char dummy = '\0';
+
 			return InternalGetByteCount (chars, count, EncoderFallback, ref dummy, true);
 		}
 
@@ -228,6 +231,7 @@ namespace Portable.Text
 					// By default it is empty, so I do nothing for now.
 					leftOver = '\0';
 				}
+
 				return 0;
 			}
 
@@ -872,7 +876,7 @@ namespace Portable.Text
 		public override byte[] GetPreamble ()
 		{
 			if (emitIdentifier)
-				return new byte [] { 0xEF, 0xBB, 0xBF };
+				return new byte[] { 0xEF, 0xBB, 0xBF };
 
 			return new byte[0];
 		}

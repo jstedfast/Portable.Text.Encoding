@@ -55,7 +55,7 @@ namespace Portable.Text
 			get { return fallback_assigned ? replacement.Length - current : 0; }
 		}
 
-		public override bool Fallback (byte [] bytesUnknown, int index)
+		public override bool Fallback (byte[] bytesUnknown, int index)
 		{
 			if (bytesUnknown == null)
 				throw new ArgumentNullException ("bytesUnknown");

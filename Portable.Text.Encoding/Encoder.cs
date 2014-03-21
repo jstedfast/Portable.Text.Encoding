@@ -66,7 +66,7 @@ namespace Portable.Text
 				fallback_buffer.Reset ();
 		}
 
-		public virtual void Convert (char[] chars, int charIndex, int charCount, byte [] bytes, int byteIndex, int byteCount, bool flush, out int charsUsed, out int bytesUsed, out bool completed)
+		public virtual void Convert (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, int byteCount, bool flush, out int charsUsed, out int bytesUsed, out bool completed)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");

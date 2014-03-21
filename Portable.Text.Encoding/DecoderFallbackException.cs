@@ -49,16 +49,16 @@ namespace Portable.Text
 		{
 		}
 
-		public DecoderFallbackException (string message, byte [] bytesUnknown, int index) : base (message)
+		public DecoderFallbackException (string message, byte[] bytesUnknown, int index) : base (message)
 		{
 			bytes_unknown = bytesUnknown;
 			this.index = index;
 		}
 
-		byte [] bytes_unknown;
+		byte[] bytes_unknown;
 		int index = - 1;
 
-		public byte [] BytesUnknown {
+		public byte[] BytesUnknown {
 			get { return bytes_unknown; }
 		}
 

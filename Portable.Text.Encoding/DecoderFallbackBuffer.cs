@@ -38,7 +38,7 @@ namespace Portable.Text
 
 		public abstract int Remaining { get; }
 
-		public abstract bool Fallback (byte [] bytesUnknown, int index);
+		public abstract bool Fallback (byte[] bytesUnknown, int index);
 
 		public abstract char GetNextChar ();
 
@@ -49,4 +49,3 @@ namespace Portable.Text
 		}
 	}
 }
-

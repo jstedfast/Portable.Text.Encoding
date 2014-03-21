@@ -34,7 +34,7 @@ namespace Portable.Text
 		static readonly string[] CodePageClassPrefixes = { "System.Text.CP", "Portable.Text.CP" };
 
 		// Code page used by this encoding.
-		internal int codePage;
+		internal readonly int codePage;
 		internal int windows_code_page;
 		bool is_readonly = true;
 
@@ -92,8 +92,10 @@ namespace Portable.Text
 			set {
 				if (IsReadOnly)
 					throw new InvalidOperationException ("This Encoding is readonly.");
+
 				if (value == null)
 					throw new ArgumentNullException ();
+
 				decoder_fallback = value;
 			}
 		}
@@ -103,8 +105,10 @@ namespace Portable.Text
 			set {
 				if (IsReadOnly)
 					throw new InvalidOperationException ("This Encoding is readonly.");
+
 				if (value == null)
 					throw new ArgumentNullException ();
+
 				encoder_fallback = value;
 			}
 		}
@@ -113,6 +117,7 @@ namespace Portable.Text
 		{
 			if (e != null)
 				encoder_fallback = e;
+
 			if (d != null)
 				decoder_fallback = d;
 		}
@@ -231,7 +236,7 @@ namespace Portable.Text
 
 			unsafe {
 				fixed (char* cptr = s) {
-					byte [] bytes = new byte [byteCount];
+					byte[] bytes = new byte [byteCount];
 					fixed (byte* bptr = bytes) {
 						GetBytes (cptr, s.Length,
 							bptr, byteCount);
@@ -368,7 +373,7 @@ namespace Portable.Text
 			if (decoderFallback == null)
 				throw new ArgumentNullException ("decoderFallback");
 
-			var encoding = (Encoding) GetEncoding (codepage).Clone ();
+			var encoding = GetEncoding (codepage).Clone ();
 			encoding.is_readonly = false;
 			encoding.encoder_fallback = encoderFallback;
 			encoding.decoder_fallback = decoderFallback;
@@ -383,7 +388,7 @@ namespace Portable.Text
 			if (decoderFallback == null)
 				throw new ArgumentNullException ("decoderFallback");
 
-			var encoding = (Encoding) GetEncoding (name).Clone ();
+			var encoding = GetEncoding (name).Clone ();
 			encoding.is_readonly = false;
 			encoding.encoder_fallback = encoderFallback;
 			encoding.decoder_fallback = decoderFallback;
@@ -511,7 +516,6 @@ namespace Portable.Text
 
 			if (type != null)
 				return (Encoding) Activator.CreateInstance (type);
-
 
 			// Look in any assembly, in case the application
 			// has provided its own code page handler.

@@ -45,9 +45,9 @@ namespace Portable.Text
 			return new EncoderExceptionFallbackBuffer ();
 		}
 
-		public override bool Equals (object value)
+		public override bool Equals (object obj)
 		{
-			return (value is EncoderExceptionFallback);
+			return (obj is EncoderExceptionFallback);
 		}
 
 		public override int GetHashCode ()

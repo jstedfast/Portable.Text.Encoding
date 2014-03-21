@@ -85,7 +85,7 @@ namespace Portable.Text
 				fallback_buffer.Reset ();
 		}
 
-		public virtual void Convert (byte [] bytes, int byteIndex, int byteCount, char [] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+		public virtual void Convert (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
 		{
 			CheckArguments (bytes, byteIndex, byteCount);
 
@@ -112,7 +112,7 @@ namespace Portable.Text
 			charsUsed = GetChars (bytes, byteIndex, bytesUsed, chars, charIndex, flush);
 		}
 
-		static void CheckArguments (char [] chars, int charIndex)
+		static void CheckArguments (char[] chars, int charIndex)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
@@ -121,7 +121,7 @@ namespace Portable.Text
 				throw new ArgumentOutOfRangeException ("charIndex");
 		}
 
-		static void CheckArguments (byte [] bytes, int byteIndex, int byteCount)
+		static void CheckArguments (byte[] bytes, int byteIndex, int byteCount)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");

@@ -117,7 +117,7 @@ namespace Portable.Text
 		}
 
 		// Get the bytes that result from encoding a character buffer.
-		public unsafe override int GetBytes (char [] chars, int charIndex, int charCount, byte [] bytes, int byteIndex)
+		public unsafe override int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
@@ -139,7 +139,7 @@ namespace Portable.Text
 
 			int byteCount = bytes.Length - byteIndex;
 			if (bytes.Length == 0)
-				bytes = new byte [1];
+				bytes = new byte[1];
 
 			fixed (char* charPtr = chars) {
 				fixed (byte* bytePtr = bytes) {
@@ -148,7 +148,7 @@ namespace Portable.Text
 			}
 		}
 
-		public unsafe override int GetBytes (string s, int charIndex, int charCount, byte [] bytes, int byteIndex)
+		public unsafe override int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
@@ -171,7 +171,7 @@ namespace Portable.Text
 
 			int byteCount = bytes.Length - byteIndex;
 			if (bytes.Length == 0)
-				bytes = new byte [1];
+				bytes = new byte[1];
 
 			fixed (char* charPtr = s) {
 				fixed (byte* bytePtr = bytes) {
@@ -236,7 +236,7 @@ namespace Portable.Text
 		}
 
 		// Get the characters that result from decoding a byte buffer.
-		public unsafe override int GetChars (byte [] bytes, int byteIndex, int byteCount, char [] chars, int charIndex)
+		public unsafe override int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
@@ -258,7 +258,7 @@ namespace Portable.Text
 
 			int charCount = chars.Length - charIndex;
 			if (chars.Length == 0)
-				chars = new char [1];
+				chars = new char[1];
 
 			fixed (byte* bytePtr = bytes) {
 				fixed (char* charPtr = chars) {
@@ -285,7 +285,7 @@ namespace Portable.Text
 		}
 
 		// Decode a buffer of bytes into a string.
-		public unsafe override string GetString (byte [] bytes, int index, int count)
+		public unsafe override string GetString (byte[] bytes, int index, int count)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
@@ -537,7 +537,7 @@ namespace Portable.Text
 				return count / 2;
 			}
 
-			public unsafe override int GetChars (byte [] bytes, int byteIndex, int byteCount, char [] chars, int charIndex)
+			public unsafe override int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
 			{
 				if (bytes == null)
 					throw new ArgumentNullException ("bytes");

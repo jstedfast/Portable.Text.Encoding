@@ -40,7 +40,7 @@ namespace Portable.Text
 			get { return 0; }
 		}
 
-		public override bool Fallback (byte [] bytesUnknown, int index)
+		public override bool Fallback (byte[] bytesUnknown, int index)
 		{
 			throw new DecoderFallbackException (null, bytesUnknown, index);
 		}

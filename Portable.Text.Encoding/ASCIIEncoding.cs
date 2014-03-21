@@ -61,24 +61,24 @@ namespace Portable.Text {
 		}
 
 		// Convenience wrappers for "GetByteCount".
-		public override int GetByteCount (string chars)
+		public override int GetByteCount (string s)
 		{
-			if (chars == null)
-				throw new ArgumentNullException ("chars");
+			if (s == null)
+				throw new ArgumentNullException ("s");
 
-			return chars.Length;
+			return s.Length;
 		}
 
 		// Get the bytes that result from encoding a character buffer.
 		public override int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
 		{
 			EncoderFallbackBuffer buffer = null;
-			char [] fallback_chars = null;
+			char[] fallback_chars = null;
 
 			return GetBytes (chars, charIndex, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
 		}
 
-		int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char [] fallback_chars)
+		int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char[] fallback_chars)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
@@ -94,12 +94,12 @@ namespace Portable.Text {
 		public override int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
 		{
 			EncoderFallbackBuffer buffer = null;
-			char [] fallback_chars = null;
+			char[] fallback_chars = null;
 
 			return GetBytes (s, charIndex, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
 		}
 
-		int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char [] fallback_chars)
+		int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char[] fallback_chars)
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
@@ -111,7 +111,7 @@ namespace Portable.Text {
 			}
 		}
 
-		unsafe int InternalGetBytes (char *chars, int charLength, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char [] fallback_chars)
+		unsafe int InternalGetBytes (char *chars, int charLength, int charIndex, int charCount, byte[] bytes, int byteIndex, ref EncoderFallbackBuffer buffer, ref char[] fallback_chars)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
