@@ -104,9 +104,11 @@ namespace Portable.Text {
 			if (s == null)
 				throw new ArgumentNullException ("s");
 
+			var chars = s.Substring (charIndex, charCount).ToCharArray ();
+
 			unsafe {
-				fixed (char *cptr = s) {
-					return InternalGetBytes (cptr, s.Length, charIndex, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
+				fixed (char *cptr = chars) {
+					return InternalGetBytes (cptr, chars.Length, 0, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
 				}
 			}
 		}
@@ -133,8 +135,8 @@ namespace Portable.Text {
 
 			while (count-- > 0) {
 				ch = chars [charIndex++];
-				if (ch < (char)0x80) {
-					bytes [byteIndex++] = (byte)ch;
+				if (ch < (char) 0x80) {
+					bytes [byteIndex++] = (byte) ch;
 				} else {
 					if (buffer == null)
 						buffer = EncoderFallback.CreateFallbackBuffer ();
@@ -148,9 +150,9 @@ namespace Portable.Text {
 						fallback_chars = new char [buffer.Remaining];
 
 					for (int i = 0; i < fallback_chars.Length; i++)
-						fallback_chars [i] = buffer.GetNextChar ();
+						fallback_chars[i] = buffer.GetNextChar ();
 
-					byteIndex += GetBytes (fallback_chars, 0,  fallback_chars.Length, bytes, byteIndex, ref buffer, ref fallback_chars);
+					byteIndex += GetBytes (fallback_chars, 0, fallback_chars.Length, bytes, byteIndex, ref buffer, ref fallback_chars);
 				}
 			}
 			return charCount;

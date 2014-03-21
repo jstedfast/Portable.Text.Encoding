@@ -382,16 +382,18 @@ namespace Portable.Text
 			if (charIndex == s.Length)
 				return 0;
 
+			var chars = s.Substring (charIndex, charCount).ToCharArray ();
+
 			unsafe {
-				fixed (char* cptr = s) {
+				fixed (char* cptr = chars) {
 					EncoderFallbackBuffer buffer = null;
 					char dummy = '\0';
 
 					if (bytes.Length == byteIndex)
-						return InternalGetBytes (cptr + charIndex, charCount, null, 0, EncoderFallback, ref buffer, ref dummy, true);
+						return InternalGetBytes (cptr, charCount, null, 0, EncoderFallback, ref buffer, ref dummy, true);
 
 					fixed (byte *bptr = bytes) {
-						return InternalGetBytes (cptr + charIndex, charCount, bptr + byteIndex, bytes.Length - byteIndex, EncoderFallback, ref buffer, ref dummy, true);
+						return InternalGetBytes (cptr, charCount, bptr + byteIndex, bytes.Length - byteIndex, EncoderFallback, ref buffer, ref dummy, true);
 					}
 				}
 			}

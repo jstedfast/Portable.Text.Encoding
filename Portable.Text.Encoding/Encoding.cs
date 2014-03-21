@@ -177,8 +177,10 @@ namespace Portable.Text
 			if (s.Length == 0)
 				return 0;
 
+			var chars = s.ToCharArray ();
+
 			unsafe {
-				fixed (char* cptr = s) {
+				fixed (char* cptr = chars) {
 					return GetByteCount (cptr, s.Length);
 				}
 			}
@@ -200,23 +202,25 @@ namespace Portable.Text
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
+
 			if (charIndex < 0 || charIndex > s.Length)
 				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+
 			if (charCount < 0 || charIndex > (s.Length - charCount))
 				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_Array"));
+
 			if (byteIndex < 0 || byteIndex > bytes.Length)
 				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
 
 			if (charCount == 0 || bytes.Length == byteIndex)
 				return 0;
 
+			var chars = s.Substring (charIndex, charCount).ToCharArray ();
+
 			unsafe {
-				fixed (char* cptr = s) {
+				fixed (char* cptr = chars) {
 					fixed (byte* bptr = bytes) {
-						return GetBytes (cptr + charIndex,
-							charCount,
-							bptr + byteIndex,
-							bytes.Length - byteIndex);
+						return GetBytes (cptr, charCount, bptr + byteIndex, bytes.Length - byteIndex);
 					}
 				}
 			}
@@ -230,16 +234,18 @@ namespace Portable.Text
 			if (s.Length == 0)
 				return new byte[0];
 
-			int byteCount = GetByteCount (s);
+			var chars = s.ToCharArray ();
+
+			int byteCount = GetByteCount (chars);
 			if (byteCount == 0)
 				return new byte[0];
 
 			unsafe {
-				fixed (char* cptr = s) {
-					byte[] bytes = new byte [byteCount];
+				fixed (char* cptr = chars) {
+					var bytes = new byte [byteCount];
+
 					fixed (byte* bptr = bytes) {
-						GetBytes (cptr, s.Length,
-							bptr, byteCount);
+						GetBytes (cptr, s.Length, bptr, byteCount);
 						return bytes;
 					}
 				}
@@ -249,16 +255,20 @@ namespace Portable.Text
 		public virtual byte[] GetBytes (char[] chars, int index, int count)
 		{
 			int numBytes = GetByteCount (chars, index, count);
-			byte[] bytes = new byte [numBytes];
+			var bytes = new byte [numBytes];
+
 			GetBytes (chars, index, count, bytes, 0);
+
 			return bytes;
 		}
 
 		public virtual byte[] GetBytes (char[] chars)
 		{
 			int numBytes = GetByteCount (chars, 0, chars.Length);
-			byte[] bytes = new byte [numBytes];
+			var bytes = new byte [numBytes];
+
 			GetBytes (chars, 0, chars.Length, bytes, 0);
+
 			return bytes;
 		}
 
