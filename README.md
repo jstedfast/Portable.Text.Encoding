@@ -79,11 +79,12 @@ So far, most of the code has been taken directly from [Mono](https://github.com/
 straight-forward to "port" the [I18N](https://github.com/mono/mono/tree/master/mcs/class/I18N) assemblies over to
 Portable.Text.Encoding.
 
-I think the best coarse of action is to follow the same overall design of the I18N assemblies - in other words: create
-a new PCL project/assembly for each "region" (West, CJK, MidEast, Rare, Other). Once you've added all the sources (and 
-tables for those that have them) and setting the PCL Profile to Profile136 (.NET 4.0, Silverlight 5, Windows Phone 8, 
-Windows Store), just try building. If there aren't any errors, you're done! If there are any compilation errors, here
-is the most common issue I've run into so far and how to solve it:
+I think the best coarse of action is to follow the same overall design of the I18N assemblies - in other words: 
+create a new PCL project/assembly for each "region" (West, CJK, MidEast, Rare, Other). Once you've added all the
+sources (and tables for those that have them), changed the namespace from `System.Text` to `Portable.Text`, and
+set the PCL Profile to Profile136 (.NET 4.0, Silverlight 5, Windows Phone 8, Windows Store), just try building.
+If there aren't any errors, you're done! If there are any compilation errors, here is the most common issue I've
+run into so far and how to solve it:
 
 ##### Error: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.get_OffsetToStringData'
 
