@@ -116,10 +116,10 @@ namespace Portable.Text
 				throw new ArgumentNullException ("chars");
 
 			if (index < 0 || index > chars.Length)
-				throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("index");
 
 			if (count < 0 || count > (chars.Length - index))
-				throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("count");
 
 			// Determine the length of the output.
 			int leftOverSize = (leftOver >> 8);
@@ -217,13 +217,13 @@ namespace Portable.Text
 				throw new ArgumentNullException ("bytes");
 
 			if (charIndex < 0 || charIndex > chars.Length)
-				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charIndex");
 
 			if (charCount < 0 || charCount > (chars.Length - charIndex))
-				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charCount");
 
 			if (byteIndex < 0 || byteIndex > bytes.Length)
-				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteIndex");
 
 			// Convert the characters.
 			int leftOverBits = (leftOver & 0xFF);
@@ -245,7 +245,7 @@ namespace Portable.Text
 					// Handle characters that must be fully encoded.
 					if (!isInShifted) {
 						if (posn >= byteLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+							throw new ArgumentException ("Insufficient space available.", "bytes");
 
 						// Start the sequence
 						bytes[posn++] = (byte)'+';
@@ -258,7 +258,7 @@ namespace Portable.Text
 
 					while (leftOverSize >= 6) {
 						if (posn >= byteLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+							throw new ArgumentException ("Insufficient space available.", "bytes");
 
 						leftOverSize -= 6;
 						bytes[posn++] = (byte) base64 [leftOverBits >> leftOverSize];
@@ -271,13 +271,13 @@ namespace Portable.Text
 						if (leftOverSize != 0) {
 							// Flush the previous encoded sequence.
 							if ((posn + 1) > byteLength)
-								throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+								throw new ArgumentException ("Insufficient space available.", "bytes");
 
 							bytes[posn++] = (byte) base64 [leftOverBits << (6 - leftOverSize)];
 						}
 
 						if ((posn + 1) > byteLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+							throw new ArgumentException ("Insufficient space available.", "bytes");
 
 						// Terminate the sequence
 						bytes[posn++] = (byte)'-';
@@ -287,7 +287,7 @@ namespace Portable.Text
 					}
 
 					if (posn >= byteLength)
-						throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+						throw new ArgumentException ("Insufficient space available.", "bytes");
 
 					bytes[posn++] = (byte) ch;
 					break;
@@ -303,13 +303,13 @@ namespace Portable.Text
 						if (leftOverSize != 0) {
 							// Flush the previous encoded sequence.
 							if ((posn + 1) > byteLength)
-								throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+								throw new ArgumentException ("Insufficient space available.", "bytes");
 
 							bytes[posn++] = (byte) base64 [leftOverBits << (6 - leftOverSize)];
 						}
 
 						if ((posn + 1) > byteLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+							throw new ArgumentException ("Insufficient space available.", "bytes");
 
 						// Terminate the sequence
 						bytes[posn++] = (byte) '-';
@@ -319,7 +319,7 @@ namespace Portable.Text
 					}
 
 					if ((posn + 2) > byteLength)
-						throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+						throw new ArgumentException ("Insufficient space available.", "bytes");
 
 					bytes[posn++] = (byte) '+';
 					bytes[posn++] = (byte) '-';
@@ -331,7 +331,7 @@ namespace Portable.Text
 				// Flush the previous encoded sequence.
 				if (leftOverSize != 0) {
 					if ((posn + 1) > byteLength)
-						throw new ArgumentException (_("Arg_InsufficientSpace"), "bytes");
+						throw new ArgumentException ("Insufficient space available.", "bytes");
 
 					bytes[posn++] = (byte) base64 [leftOverBits << (6 - leftOverSize)];
 				}
@@ -367,10 +367,10 @@ namespace Portable.Text
 				throw new ArgumentNullException ("bytes");
 
 			if (index < 0 || index > bytes.Length)
-				throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("index");
 
 			if (count < 0 || count > (bytes.Length - index))
-				throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("count");
 
 			// Determine the length of the result.
 			bool prevIsPlus = ((leftOver & 0x02000000) != 0);
@@ -441,13 +441,13 @@ namespace Portable.Text
 				throw new ArgumentNullException ("chars");
 
 			if (byteIndex < 0 || byteIndex > bytes.Length)
-				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteIndex");
 
 			if (byteCount < 0 || byteCount > (bytes.Length - byteIndex))
-				throw new ArgumentOutOfRangeException ("byteCount", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteCount");
 
 			if (charIndex < 0 || charIndex > chars.Length)
-				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charIndex");
 
 			// Convert the bytes into characters.
 			bool afterHighSurrogate = ((leftOver & 0x04000000) != 0);
@@ -468,10 +468,10 @@ namespace Portable.Text
 					if (byteval != '+') {
 						// Directly-encoded character.
 						if (posn >= charLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "chars");
+							throw new ArgumentException ("Insufficient space available.", "chars");
 
 						if (afterHighSurrogate)
-							throw new ArgumentException (_("Arg_InvalidUTF7"), "chars");
+							throw new ArgumentException ("Invalid UTF-7.", "chars");
 
 						chars[posn++] = (char) byteval;
 					} else {
@@ -485,10 +485,10 @@ namespace Portable.Text
 						// End of a base64 sequence.
 						if (prevIsPlus) {
 							if (posn >= charLength)
-								throw new ArgumentException (_("Arg_InsufficientSpace"), "chars");
+								throw new ArgumentException ("Insufficient space available.", "chars");
 
 							if (afterHighSurrogate)
-								throw new ArgumentException (_("Arg_InvalidUTF7"), "chars");
+								throw new ArgumentException ("Invalid UTF-7.", "chars");
 
 							chars[posn++] = '+';
 						}
@@ -507,7 +507,7 @@ namespace Portable.Text
 
 						if (leftOverSize >= 16) {
 							if (posn >= charLength)
-								throw new ArgumentException (_("Arg_InsufficientSpace"), "chars");
+								throw new ArgumentException ("Insufficient space available.", "chars");
 
 							leftOverSize -= 16;
 							char nextChar = (char) (leftOverBits >> leftOverSize);
@@ -515,7 +515,7 @@ namespace Portable.Text
 								afterHighSurrogate = true;
 							} else if ((nextChar & 0xFC00) == 0xDC00) {
 								if (!afterHighSurrogate)
-									throw new ArgumentException (_("Arg_InvalidUTF7"), "chars");
+									throw new ArgumentException ("Invalid UTF-7.", "chars");
 
 								afterHighSurrogate = false;
 							}
@@ -525,10 +525,10 @@ namespace Portable.Text
 						}
 					} else {
 						if (posn >= charLength)
-							throw new ArgumentException (_("Arg_InsufficientSpace"), "chars");
+							throw new ArgumentException ("Insufficient space available.", "chars");
 
 						if (afterHighSurrogate)
-							throw new ArgumentException (_("Arg_InvalidUTF7"), "chars");
+							throw new ArgumentException ("Invalid UTF-7.", "chars");
 
 						chars[posn++] = (char) byteval;
 						leftOverSize = 0;
@@ -554,7 +554,7 @@ namespace Portable.Text
 			int amount = InternalGetChars (bytes, byteIndex, byteCount, chars, charIndex, ref leftOver);
 
 			if ((leftOver & 0x04000000) != 0)
-				throw new ArgumentException (_("Arg_InvalidUTF7"), "chars");
+				throw new ArgumentException ("Invalid UTF-7.", "chars");
 
 			return amount;
 		}
@@ -564,7 +564,7 @@ namespace Portable.Text
 		public override int GetMaxByteCount (int charCount)
 		{
 			if (charCount < 0)
-				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_NonNegative"));
+				throw new ArgumentOutOfRangeException ("charCount");
 
 			if (charCount == 0)
 				return 0;
@@ -577,7 +577,7 @@ namespace Portable.Text
 		public override int GetMaxCharCount (int byteCount)
 		{
 			if (byteCount < 0)
-				throw new ArgumentOutOfRangeException ("byteCount", _("ArgRange_NonNegative"));
+				throw new ArgumentOutOfRangeException ("byteCount");
 
 			return byteCount;
 		}

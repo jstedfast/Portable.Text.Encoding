@@ -88,10 +88,10 @@ namespace Portable.Text
 				throw new ArgumentNullException ("chars");
 
 			if (index < 0 || index > chars.Length)
-				throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("index");
 
 			if (count < 0 || count > (chars.Length - index))
-				throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("count");
 
 			int ret = 0;
 			for (int i = index; i < index + count; i++) {
@@ -121,16 +121,16 @@ namespace Portable.Text
 				throw new ArgumentNullException ("bytes");
 
 			if (charIndex < 0 || charIndex > chars.Length)
-				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charIndex");
 
 			if (charCount < 0 || charCount > (chars.Length - charIndex))
-				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charCount");
 
 			if (byteIndex < 0 || byteIndex > bytes.Length)
-				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteIndex");
 
 			if ((bytes.Length - byteIndex) < (charCount * 4))
-				throw new ArgumentException (_("Arg_InsufficientSpace"));
+				throw new ArgumentException ("Insufficient space available.");
 
 			int posn = byteIndex;
 			char ch;
@@ -192,10 +192,10 @@ namespace Portable.Text
 				throw new ArgumentNullException ("bytes");
 
 			if (index < 0 || index > bytes.Length)
-				throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("index");
 
 			if (count < 0 || count > (bytes.Length - index))
-				throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("count");
 
 			return count / 4;
 		}
@@ -210,13 +210,13 @@ namespace Portable.Text
 				throw new ArgumentNullException ("chars");
 
 			if (byteIndex < 0 || byteIndex > bytes.Length)
-				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteIndex");
 
 			if (byteCount < 0 || byteCount > (bytes.Length - byteIndex))
-				throw new ArgumentOutOfRangeException ("byteCount", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteCount");
 
 			if (charIndex < 0 || charIndex > chars.Length)
-				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charIndex");
 
 			/*
 			// Determine the byte order in the incoming buffer.
@@ -236,7 +236,7 @@ namespace Portable.Text
 
 			// Validate that we have sufficient space in "chars".
 			if ((chars.Length - charIndex) < (byteCount / 4))
-				throw new ArgumentException (_("Arg_InsufficientSpace"));
+				throw new ArgumentException ("Insufficient space available.");
 
 			// Convert the characters.
 			int posn = charIndex;
@@ -262,7 +262,7 @@ namespace Portable.Text
 		public override int GetMaxByteCount (int charCount)
 		{
 			if (charCount < 0)
-				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_NonNegative"));
+				throw new ArgumentOutOfRangeException ("charCount");
 
 			return charCount * 4;
 		}
@@ -272,7 +272,7 @@ namespace Portable.Text
 		public override int GetMaxCharCount (int byteCount)
 		{
 			if (byteCount < 0)
-				throw new ArgumentOutOfRangeException ("byteCount", _("ArgRange_NonNegative"));
+				throw new ArgumentOutOfRangeException ("byteCount");
 
 			return byteCount / 4;
 		}
@@ -345,10 +345,10 @@ namespace Portable.Text
 					throw new ArgumentNullException ("bytes");
 
 				if (index < 0 || index > bytes.Length)
-					throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+					throw new ArgumentOutOfRangeException ("index");
 
 				if (count < 0 || count > (bytes.Length - index))
-					throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+					throw new ArgumentOutOfRangeException ("count");
 
 				if (leftOverByte != -1)
 					return (count + 1) / 4;
@@ -365,13 +365,13 @@ namespace Portable.Text
 					throw new ArgumentNullException ("chars");
 
 				if (byteIndex < 0 || byteIndex > bytes.Length)
-					throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+					throw new ArgumentOutOfRangeException ("byteIndex");
 
 				if (byteCount < 0 || byteCount > (bytes.Length - byteIndex))
-					throw new ArgumentOutOfRangeException ("byteCount", _("ArgRange_Array"));
+					throw new ArgumentOutOfRangeException ("byteCount");
 
 				if (charIndex < 0 || charIndex > chars.Length)
-					throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+					throw new ArgumentOutOfRangeException ("charIndex");
 
 				// Convert the characters.
 				int leftOver = leftOverByte;
@@ -390,7 +390,7 @@ namespace Portable.Text
 					}
 
 					if (leftOver > char.MaxValue && posn + 1 < length || posn < length)
-						throw new ArgumentException (_("Arg_InsufficientSpace"));
+						throw new ArgumentException ("Insufficient space available.");
 
 					if (leftOver > char.MaxValue) {
 						chars [posn++] = (char) ((leftOver - 10000) / 0x400 + 0xD800);
@@ -415,7 +415,7 @@ namespace Portable.Text
 					if (posn < length) {
 						chars[posn++] = ch;
 					} else {
-						throw new ArgumentException (_("Arg_InsufficientSpace"));
+						throw new ArgumentException ("Insufficient space available.");
 					}
 				}
 

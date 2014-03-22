@@ -1,5 +1,5 @@
 /*
-	 * Encoding.cs - Implementation of the "System.Text.Encoding" class.
+ * Encoding.cs - Implementation of the "System.Text.Encoding" class.
  *
  * Copyright (c) 2001, 2002  Southern Storm Software, Pty Ltd
  * Copyright (c) 2002, Ximian, Inc.
@@ -69,11 +69,6 @@ namespace Portable.Text
 				encoder_fallback = EncoderFallback.StandardSafeFallback;
 				break;
 			}
-		}
-
-		// until we change the callers:
-		internal static string _ (string arg) {
-			return arg;
 		}
 
 		DecoderFallback decoder_fallback;
@@ -149,10 +144,10 @@ namespace Portable.Text
 				throw new ArgumentNullException ("bytes");
 
 			if (index < 0 || index > bytes.Length)
-				throw new ArgumentOutOfRangeException ("index", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("index");
 
 			if (count < 0 || (bytes.Length - index) < count)
-				throw new ArgumentOutOfRangeException ("count", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("count");
 
 			return dstEncoding.GetBytes (srcEncoding.GetChars (bytes, index, count));
 		}
@@ -204,13 +199,13 @@ namespace Portable.Text
 				throw new ArgumentNullException ("s");
 
 			if (charIndex < 0 || charIndex > s.Length)
-				throw new ArgumentOutOfRangeException ("charIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charIndex");
 
 			if (charCount < 0 || charIndex > (s.Length - charCount))
-				throw new ArgumentOutOfRangeException ("charCount", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("charCount");
 
 			if (byteIndex < 0 || byteIndex > bytes.Length)
-				throw new ArgumentOutOfRangeException ("byteIndex", _("ArgRange_Array"));
+				throw new ArgumentOutOfRangeException ("byteIndex");
 
 			if (charCount == 0 || bytes.Length == byteIndex)
 				return 0;
