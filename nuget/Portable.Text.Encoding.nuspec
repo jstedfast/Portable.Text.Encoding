@@ -1,19 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Portable.Text.Encoding</id>
         <version>0.1.0.0</version>
         <title>Portable.Text.Encoding: A Portable Implementation of System.Text.Encoding.</title>
-        <authors>Jeffrey Stedfast</authors>
+        <authors>Jeffrey Stedfast,Atsushi Enomoto,and Mono contributors</authors>
         <owners>Jeffrey Stedfast</owners>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>http://github.com/jstedfast/Portable.Text.Encoding</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description></description>
+        <description>The main goal of this project is to supply a portable alternative to System.Text.Encoding that can be used from other PCL libraries.
+
+Platforms such as Silverlight and Windows Phone currently do not provide support for text encodings other than a limited subset of the Unicode encodings. This can be a real show-stopper when you need to work with legacy text encodings.
+
+Currently supported encodings include: ASCII, Latin1, and all Unicode encodings (including UTF-7 and UTF-8).</description>
         <summary>A Portable Implementation of System.Text.Encoding.</summary>
         <releaseNotes>* Initial release.</releaseNotes>
         <copyright>Xamarin Inc.</copyright>
         <language>en-US</language>
         <tags>silverlight winrt wp8</tags>
     </metadata>
+    <files>
+        <file src="..\bin\Release\Portable.Text.Encoding.dll" target="lib\portable-net4+sl5+wp8+win8\Portable.Text.Encoding.dll" />
+    </files>
 </package>
