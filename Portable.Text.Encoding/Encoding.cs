@@ -31,8 +31,6 @@ namespace Portable.Text
 {
 	public abstract class Encoding
 	{
-		static readonly string[] CodePageClassPrefixes = { "System.Text.CP", "Portable.Text.CP" };
-
 		// Code page used by this encoding.
 		internal readonly int codePage;
 		internal int windows_code_page;
@@ -333,30 +331,27 @@ namespace Portable.Text
 			case 0:                                     return Default;
 			}
 
+			// Build a code page class name.
+			string className = "Portable.Text.CP" + codepage;
+			Encoding encoding;
+
+			// Look for a code page converter in this assembly.
 			var assembly = Assembly.GetExecutingAssembly ();
+			var type = assembly.GetType (className);
 
-			foreach (var prefix in CodePageClassPrefixes) {
-				// Build a code page class name.
-				string className = prefix + codepage;
-				Encoding encoding;
+			if (type != null) {
+				encoding = (Encoding) Activator.CreateInstance (type);
+				encoding.is_readonly = true;
+				return encoding;
+			}
 
-				// Look for a code page converter in this assembly.
-				var type = assembly.GetType (className);
-
-				if (type != null) {
-					encoding = (Encoding) Activator.CreateInstance (type);
-					encoding.is_readonly = true;
-					return encoding;
-				}
-
-				// Look in any assembly, in case the application
-				// has provided its own code page handler.
-				type = Type.GetType (className);
-				if (type != null) {
-					encoding = (Encoding) Activator.CreateInstance (type);
-					encoding.is_readonly = true;
-					return encoding;
-				}
+			// Look in any assembly, in case the application
+			// has provided its own code page handler.
+			type = Type.GetType (className);
+			if (type != null) {
+				encoding = (Encoding) Activator.CreateInstance (type);
+				encoding.is_readonly = true;
+				return encoding;
 			}
 
 			// We have no idea how to handle this code page.
@@ -907,6 +902,7 @@ namespace Portable.Text
 
 			var b = GetBytes (c, 0, charCount);
 			int top = b.Length;
+
 			if (top > byteCount)
 				throw new ArgumentException ("byteCount is less that the number of bytes produced", "byteCount");
 
