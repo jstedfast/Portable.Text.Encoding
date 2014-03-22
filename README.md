@@ -75,7 +75,7 @@ official repo.
 
 ### Adding Support for Other Text Encodings
 
-So far, most of the code has been taken directly from [Mono](https://github.com/mono/mono) and it should be fairly
+So far, all of the code has been taken directly from [Mono](https://github.com/mono/mono) and it should be fairly
 straight-forward to "port" the [I18N](https://github.com/mono/mono/tree/master/mcs/class/I18N) assemblies over to
 Portable.Text.Encoding.
 
