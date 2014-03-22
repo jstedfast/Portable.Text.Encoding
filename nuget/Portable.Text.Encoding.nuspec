@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Portable.Text.Encoding</id>
+        <version>0.1.0.0</version>
+        <title>Portable.Text.Encoding: A Portable Implementation of System.Text.Encoding.</title>
+        <authors>Jeffrey Stedfast</authors>
+        <owners>Jeffrey Stedfast</owners>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>http://github.com/jstedfast/Portable.Text.Encoding</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description></description>
+        <summary>A Portable Implementation of System.Text.Encoding.</summary>
+        <releaseNotes>* Initial release.</releaseNotes>
+        <copyright>Xamarin Inc.</copyright>
+        <language>en-US</language>
+        <tags>silverlight winrt wp8</tags>
+    </metadata>
+</package>
