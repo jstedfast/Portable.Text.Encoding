@@ -106,11 +106,9 @@ namespace Portable.Text
 			if (s == null)
 				throw new ArgumentNullException ("s");
 
-			var chars = s.Substring (charIndex, charCount).ToCharArray ();
-
 			unsafe {
-				fixed (char *cptr = chars) {
-					return InternalGetBytes (cptr, chars.Length, 0, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
+				fixed (char *cptr = s) {
+					return InternalGetBytes (cptr, s.Length, charIndex, charCount, bytes, byteIndex, ref buffer, ref fallback_chars);
 				}
 			}
 		}

@@ -170,10 +170,8 @@ namespace Portable.Text
 			if (s.Length == 0)
 				return 0;
 
-			var chars = s.ToCharArray ();
-
 			unsafe {
-				fixed (char* cptr = chars) {
+				fixed (char* cptr = s) {
 					return GetByteCount (cptr, s.Length);
 				}
 			}
@@ -208,12 +206,10 @@ namespace Portable.Text
 			if (charCount == 0 || bytes.Length == byteIndex)
 				return 0;
 
-			var chars = s.Substring (charIndex, charCount).ToCharArray ();
-
 			unsafe {
-				fixed (char* cptr = chars) {
+				fixed (char* cptr = s) {
 					fixed (byte* bptr = bytes) {
-						return GetBytes (cptr, charCount, bptr + byteIndex, bytes.Length - byteIndex);
+						return GetBytes (cptr + charIndex, charCount, bptr + byteIndex, bytes.Length - byteIndex);
 					}
 				}
 			}
@@ -227,14 +223,12 @@ namespace Portable.Text
 			if (s.Length == 0)
 				return new byte[0];
 
-			var chars = s.ToCharArray ();
-
-			int byteCount = GetByteCount (chars);
+			int byteCount = GetByteCount (s);
 			if (byteCount == 0)
 				return new byte[0];
 
 			unsafe {
-				fixed (char* cptr = chars) {
+				fixed (char* cptr = s) {
 					var bytes = new byte [byteCount];
 
 					fixed (byte* bptr = bytes) {
@@ -336,7 +330,7 @@ namespace Portable.Text
 			Encoding encoding;
 
 			// Look for a code page converter in this assembly.
-			var assembly = Assembly.GetExecutingAssembly ();
+			var assembly = typeof (Encoding).GetTypeInfo ().Assembly;
 			var type = assembly.GetType (className);
 
 			if (type != null) {
@@ -511,7 +505,7 @@ namespace Portable.Text
 			string encodingName = "System.Text.ENC" + converted;	
 
 			// Look for a code page converter in this assembly.
-			var assembly = Assembly.GetExecutingAssembly ();
+			var assembly = typeof (Encoding).GetTypeInfo ().Assembly;
 			var type = assembly.GetType (encodingName);
 
 			if (type != null)

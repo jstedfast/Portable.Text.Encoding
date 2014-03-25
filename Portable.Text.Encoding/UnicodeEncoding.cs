@@ -173,11 +173,9 @@ namespace Portable.Text
 			if (bytes.Length == 0)
 				bytes = new byte[1];
 
-			var chars = s.Substring (charIndex, charCount).ToCharArray ();
-
-			fixed (char* charPtr = chars) {
+			fixed (char* charPtr = s) {
 				fixed (byte* bytePtr = bytes) {
-					return GetBytesInternal (charPtr, charCount, bytePtr + byteIndex, byteCount);
+					return GetBytesInternal (charPtr + charIndex, charCount, bytePtr + byteIndex, byteCount);
 				}
 			}
 		}
