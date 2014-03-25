@@ -8,9 +8,8 @@ A Portable Implementation of System.Text.Encoding.
 The main goal of this project is to supply a portable alternative to System.Text.Encoding that can be used
 from other PCL libraries.
 
-Platforms such as Silverlight and Windows Phone currently do not provide support for text encodings other
-than a limited subset of the Unicode encodings. This can be a real show-stopper when you need to work with
-legacy text encodings.
+Platforms such as Windows Phone currently do not provide support for text encodings other than a limited subset
+of the Unicode encodings. This can be a real show-stopper when you need to work with legacy text encodings.
 
 For example, while trying to make a PCL version of [MimeKit](https://github.com/jstedfast/MimeKit) available
 for developers targetting Windows Phone, the biggest road block that I ran into was a lack of support for
@@ -82,39 +81,8 @@ Portable.Text.Encoding.
 I think the best coarse of action is to follow the same overall design of the I18N assemblies - in other words: 
 create a new PCL project/assembly for each "region" (West, CJK, MidEast, Rare, Other). Once you've added all the
 sources (and tables for those that have them), changed the namespace from `System.Text` to `Portable.Text`, and
-set the PCL Profile to Profile136 (.NET 4.0, Silverlight 5, Windows Phone 8, Windows Store), just try building.
-If there aren't any errors, you're done! If there are any compilation errors, here is the most common issue I've
-run into so far and how to solve it:
-
-##### Error: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.get_OffsetToStringData'
-
-This error occurs when the compiler encounters code like this (where 's' is a string):
-
-```csharp
-fixed (char* charPtr = s) {
-```
-
-The way I've been solving this is to modify the code to be more like:
-
-```csharp
-var chars = s.ToCharArray ();
-
-fixed (char* charPtr = chars) {
-```
-
-Sometimes, you'll find this pattern where only a subset of the string will actually be used (i.e. you'll have a `charIndex` and `charCount` available). When you find this pattern, you can instead do this:
-
-```csharp
-var chars = s.Substring (charIndex, charCount).ToCharArray ();
-
-fixed (char* charPtr = chars) {
-```
-
-*WARNING:* You'll also need to fix up code within that `fixed` statement to use `0` instead of `charIndex`.
-
-Unfortunately, this is less than ideal because what we're doing is duplicating the string in memory. Some profiles,
-such as some of the .NET 4.5 profiles like Profile78, *do* support aliasing a string using a char pointer, so at
-some point, it may be worth reconsidering the PCL Profile that Portable.Text.Encoding uses.
+set the PCL Profile to Profile78 (.NET 4.5, Windows Phone 8, Windows Store), just try building.
+If there aren't any errors, you're done!
 
 ## Reporting Bugs
 
