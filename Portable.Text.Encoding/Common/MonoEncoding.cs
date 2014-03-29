@@ -264,11 +264,6 @@ namespace Portable.Text {
 
 		public unsafe abstract int GetBytesImpl (char* chars, int charCount, byte* bytes, int byteCount, bool refresh);
 
-		public unsafe override int GetBytes (char* chars, int charCount, byte* bytes, int byteCount, bool flush)
-		{
-			return GetBytesImpl (chars, charCount, bytes, byteCount, flush);
-		}
-
 		public unsafe void HandleFallback (
 			char* chars, ref int charIndex, ref int charCount,
 			byte* bytes, ref int byteIndex, ref int byteCount, object state)

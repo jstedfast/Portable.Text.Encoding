@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,8 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common\ByteEncoding.cs" />
-    <Compile Include="Common\Handlers.cs" />
-    <Compile Include="Common\Manager.cs" />
     <Compile Include="Common\MonoEncoding.cs" />
     <Compile Include="Common\MonoSafeEncoding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,8 +78,5 @@
     <Compile Include="UTF8Encoding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Western\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

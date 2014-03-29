@@ -29,7 +29,7 @@ namespace Portable.Text {
 	// byte per character.  The bulk of the work is done in this class, with
 	// subclasses providing implementations of the "ToBytes" methods to perform
 	// the char->byte conversion.
-	public abstract class ByteEncoding : MonoEncoding
+	abstract class ByteEncoding : MonoEncoding
 	{
 //		static byte[] isNormalized;
 //		static byte[] isNormalizedComputed;
