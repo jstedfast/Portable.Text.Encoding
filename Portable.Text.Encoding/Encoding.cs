@@ -502,7 +502,7 @@ namespace Portable.Text
 			}
 
 			// Build a web encoding class name.
-			string encodingName = "System.Text.ENC" + converted;	
+			string encodingName = "Portable.Text.ENC" + converted;	
 
 			// Look for a code page converter in this assembly.
 			var assembly = typeof (Encoding).GetTypeInfo ().Assembly;
