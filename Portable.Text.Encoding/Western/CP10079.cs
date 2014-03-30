@@ -32,14 +32,13 @@ using System;
 namespace Portable.Text {
 	class CP10079 : ByteEncoding
 	{
-		public CP10079 ()
-		: base (10079, ToChars, "Icelandic (Mac)",
+		public CP10079 () : base (10079, ToChars, "Icelandic (Mac)",
 		       "x-mac-icelandic", "x-mac-icelandic", "x-mac-icelandic",
 		       false, false, false, false, 1252)
 		{
 		}
 
-		private static readonly char[] ToChars = {
+		static readonly char[] ToChars = {
 			'\u0000', '\u0001', '\u0002', '\u0003', '\u0004', '\u0005', 
 			'\u0006', '\u0007', '\u0008', '\u0009', '\u000A', '\u000B', 
 			'\u000C', '\u000D', '\u000E', '\u000F', '\u0010', '\u0011', 
@@ -84,6 +83,7 @@ namespace Portable.Text {
 			'\u02C6', '\u02DC', '\u00AF', '\u02D8', '\u02D9', '\u02DA', 
 			'\u00B8', '\u02DD', '\u02DB', '\u02C7', 
 		};
+
 		// Get the number of bytes needed to encode a character buffer.
 		public unsafe override int GetByteCountImpl (char* chars, int charCount)
 		{
@@ -94,6 +94,7 @@ namespace Portable.Text {
 				return charCount;
 			}
 		}
+
 		// Get the number of bytes needed to encode a character buffer.
 		public override int GetByteCount (String s)
 		{
@@ -109,18 +110,18 @@ namespace Portable.Text {
 				return s.Length;
 			}
 		}
+
 		//ToBytes is just an alias for GetBytesImpl, but doesn't return byte count
-		protected unsafe override void ToBytes (char* chars, int charCount,
-		                                      byte* bytes, int byteCount)
+		protected unsafe override void ToBytes (char* chars, int charCount, byte* bytes, int byteCount)
 		{
 			//Calling ToBytes with null destination buffer doesn't make any sense
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
+
 			GetBytesImpl (chars, charCount, bytes, byteCount);
 		}
 
-		public unsafe override int GetBytesImpl (char* chars, int charCount,
-		                                        byte* bytes, int byteCount)
+		public unsafe override int GetBytesImpl (char* chars, int charCount, byte* bytes, int byteCount)
 		{
 			int ch;
 			int charIndex = 0;

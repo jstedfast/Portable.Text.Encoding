@@ -113,8 +113,7 @@ namespace Portable.Text {
 		}
 
 		//ToBytes is just an alias for GetBytesImpl, but doesn't return byte count
-		protected unsafe override void ToBytes (char* chars, int charCount,
-		                                      byte* bytes, int byteCount)
+		protected unsafe override void ToBytes (char* chars, int charCount, byte* bytes, int byteCount)
 		{
 			//Calling ToBytes with null destination buffer doesn't make any sense
 			if (bytes == null)
@@ -122,8 +121,7 @@ namespace Portable.Text {
 			GetBytesImpl (chars, charCount, bytes, byteCount);
 		}
 
-		public unsafe override int GetBytesImpl (char* chars, int charCount,
-		                                        byte* bytes, int byteCount)
+		public unsafe override int GetBytesImpl (char* chars, int charCount, byte* bytes, int byteCount)
 		{
 			int ch;
 			int charIndex = 0;

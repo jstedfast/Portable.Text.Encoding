@@ -881,6 +881,11 @@ namespace Portable.Text
 			return new byte[0];
 		}
 
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode ();
+		}
+
 		// Determine if this object is equal to another.
 		public override bool Equals (Object obj)
 		{
