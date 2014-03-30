@@ -19,11 +19,11 @@ mail that was encoded in UTF-8 would have very limited value to most users.
 
 ## Supported Text Encodings
 
-So far, only ASCII, Latin1 (aka ISO-8859-1) and the Unicode (including UTF-8 and UTF-7) encodings are supported.
+Currently supported encodings include: ASCII, Unicode (including UTF-8 and UTF-7) encodings, the Western encodings (IBM437, IBM850, IBM860, IBM861, IBM862, IBM863, IBM865, ISO-8859-1, ISO-8859-2, ISO-8869-3, ISO-8859-7, ISO-8859-15, Windows-1250, WIndows-1252, Windows-1253, Macintosh and Mac-Icelandic), and the Chinese/Japanese/Korean set of encodings are supported.
 
 ## TODO
 
-Add a few more optionally-included assemblies for other Western encodings, CJK, Middle Eastern, and whatever
+Add a few more optionally-included assemblies for the Middle Eastern, and whatever
 other encodings that may be desired.
 
 ## License Information
