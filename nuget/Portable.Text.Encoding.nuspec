@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Portable.Text.Encoding</id>
         <version>0.2.0.0</version>
         <title>Portable.Text.Encoding: A Portable Implementation of System.Text.Encoding.</title>
-        <authors>Jeffrey Stedfast, Atsushi Enomoto, and Mono contributors</authors>
+        <authors>Jeffrey Stedfast,Atsushi Enomoto,and Mono contributors</authors>
         <owners>Jeffrey Stedfast</owners>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>http://github.com/jstedfast/Portable.Text.Encoding</projectUrl>
@@ -24,6 +24,6 @@ encodings.</description>
         <tags>pcl winrt wp8 xamarin</tags>
     </metadata>
     <files>
-        <file src="..\bin\Release\Portable.Text.Encoding.dll" target="lib\portable-net4+sl5+wp8+win8\Portable.Text.Encoding.dll" />
+        <file src="..\bin\Release\Portable.Text.Encoding.dll" target="lib\portable-net45+wp8+win8\Portable.Text.Encoding.dll" />
     </files>
 </package>
