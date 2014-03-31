@@ -29,20 +29,40 @@ using System.Reflection;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle ("Portable.Text.Encoding")]
-[assembly: AssemblyDescription ("")]
+[assembly: AssemblyDescription ("A Portable Implementation of System.Text.Encoding.")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Xamarin Inc.")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Xamarin Inc.")]
+[assembly: AssemblyCopyright ("Copyright © 2013-2014 Xamarin Inc. (www.xamarin.com)")]
 [assembly: AssemblyTrademark ("Xamarin Inc.")]
 [assembly: AssemblyCulture ("")]
 
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
-[assembly: AssemblyVersion ("0.1.0.0")]
-
-// The following attributes are used to specify the signing key for the assembly,
-// if desired. See the Mono documentation for more information about signing.
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Micro Version
+//      Build Number
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+//
+// Note: AssemblyVersion is what the CLR matches against at runtime, so be careful
+// about updating it. The AssemblyFileVersion is the official release version while
+// the AssemblyInformationalVersion is just used as a display version.
+//
+// Based on my current understanding, AssemblyVersion is essentially the "API Version"
+// and so should only be updated when the API changes. The other 2 Version attributes
+// represent the "Release Version".
+//
+// Making releases:
+//
+// If any classes, methods, or enum values have been added, bump the Micro Version
+//    in all version attributes and set the Build Number back to 0.
+//
+// If there have only been bug fixes, bump the Micro Version and/or the Build Number
+//    in the AssemblyFileVersion attribute.
+[assembly: AssemblyInformationalVersion ("0.2.0")]
+[assembly: AssemblyFileVersion ("0.2.0.0")]
+[assembly: AssemblyVersion ("0.2.0.0")]
