@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B76A64F9-B00E-4243-AE89-5D024CA3B436}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Portable.Text</RootNamespace>
+    <AssemblyName>Portable.Text.Encoding</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASCIIEncoding.cs" />
+    <Compile Include="Common\ByteEncoding.cs" />
+    <Compile Include="Common\MonoEncoding.cs" />
+    <Compile Include="Common\MonoSafeEncoding.cs" />
+    <Compile Include="Decoder.cs" />
+    <Compile Include="DecoderExceptionFallback.cs" />
+    <Compile Include="DecoderExceptionFallbackBuffer.cs" />
+    <Compile Include="DecoderFallback.cs" />
+    <Compile Include="DecoderFallbackBuffer.cs" />
+    <Compile Include="DecoderFallbackException.cs" />
+    <Compile Include="DecoderReplacementFallback.cs" />
+    <Compile Include="DecoderReplacementFallbackBuffer.cs" />
+    <Compile Include="Encoder.cs" />
+    <Compile Include="EncoderExceptionFallback.cs" />
+    <Compile Include="EncoderExceptionFallbackBuffer.cs" />
+    <Compile Include="EncoderFallback.cs" />
+    <Compile Include="EncoderFallbackBuffer.cs" />
+    <Compile Include="EncoderFallbackException.cs" />
+    <Compile Include="EncoderReplacementFallback.cs" />
+    <Compile Include="EncoderReplacementFallbackBuffer.cs" />
+    <Compile Include="Encoding.cs" />
+    <Compile Include="EncodingInfo.cs" />
+    <Compile Include="Latin1Encoding.cs" />
+    <Compile Include="NormalizationForm.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnicodeEncoding.cs" />
+    <Compile Include="UTF32Encoding.cs" />
+    <Compile Include="UTF7Encoding.cs" />
+    <Compile Include="UTF8Encoding.cs" />
+    <Compile Include="Western\CP10000.cs" />
+    <Compile Include="Western\CP10079.cs" />
+    <Compile Include="Western\CP1250.cs" />
+    <Compile Include="Western\CP1252.cs" />
+    <Compile Include="Western\CP1253.cs" />
+    <Compile Include="Western\CP28592.cs" />
+    <Compile Include="Western\CP28593.cs" />
+    <Compile Include="Western\CP28597.cs" />
+    <Compile Include="Western\CP28605.cs" />
+    <Compile Include="Western\CP437.cs" />
+    <Compile Include="Western\CP850.cs" />
+    <Compile Include="Western\CP860.cs" />
+    <Compile Include="Western\CP861.cs" />
+    <Compile Include="Western\CP863.cs" />
+    <Compile Include="Western\CP865.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
