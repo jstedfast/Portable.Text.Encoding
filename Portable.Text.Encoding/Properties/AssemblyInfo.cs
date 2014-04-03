@@ -33,7 +33,7 @@ using System.Reflection;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Xamarin Inc.")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Copyright © 2013-2014 Xamarin Inc. (www.xamarin.com)")]
+[assembly: AssemblyCopyright ("Copyright © 2014 Xamarin Inc. (www.xamarin.com)")]
 [assembly: AssemblyTrademark ("Xamarin Inc.")]
 [assembly: AssemblyCulture ("")]
 
@@ -63,6 +63,6 @@ using System.Reflection;
 //
 // If there have only been bug fixes, bump the Micro Version and/or the Build Number
 //    in the AssemblyFileVersion attribute.
-[assembly: AssemblyInformationalVersion ("0.2.0")]
-[assembly: AssemblyFileVersion ("0.2.0.0")]
-[assembly: AssemblyVersion ("0.2.0.0")]
+[assembly: AssemblyInformationalVersion ("0.3.0")]
+[assembly: AssemblyFileVersion ("0.3.0.0")]
+[assembly: AssemblyVersion ("0.3.0.0")]
