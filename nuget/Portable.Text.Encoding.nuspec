@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Portable.Text.Encoding</id>
-        <version>0.3.0.0</version>
+        <version>0.4.0.0</version>
         <title>Portable.Text.Encoding: A Portable Implementation of System.Text.Encoding.</title>
         <authors>Jeffrey Stedfast,Atsushi Enomoto,and Mono contributors</authors>
         <owners>Jeffrey Stedfast</owners>
@@ -11,14 +11,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>The main goal of this project is to supply a portable alternative to System.Text.Encoding that can be used from other PCL libraries.
 
-Platforms such as Windows Phone currently do not provide support for text encodings other than a limited subset of the Unicode encodings. This can be a real show-stopper when you need to work with legacy text encodings.
-
-Currently supported encodings include: ASCII, Unicode (including UTF-8 and UTF-7) encodings, the Western encodings
-(IBM437, IBM850, IBM860, IBM861, IBM862, IBM863, IBM865, ISO-8859-1, ISO-8859-2, ISO-8869-3, ISO-8859-7, ISO-8859-15,
-Windows-1250, Windows-1252, Windows-1253, Macintosh and Mac-Icelandic), and the Chinese/Japanese/Korean set of
-encodings.</description>
+Platforms such as Windows Phone currently do not provide support for text encodings other than a limited subset of the Unicode encodings. This can be a real show-stopper when you need to work with legacy text encodings.</description>
         <summary>A Portable Implementation of System.Text.Encoding.</summary>
-        <releaseNotes>* Added the Windows Phone 8.1 profile</releaseNotes>
+        <releaseNotes>* Added support for the Middle Eastern and many other text encodings.</releaseNotes>
         <copyright>Xamarin Inc.</copyright>
         <language>en-US</language>
         <tags>pcl winrt win8 win81 wp8 wp81 wpa81 xamarin</tags>
