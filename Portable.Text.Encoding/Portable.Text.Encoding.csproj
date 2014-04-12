@@ -51,6 +51,13 @@
     <Compile Include="CJK\GB18030Source.cs" />
     <Compile Include="CJK\ISO2022JP.cs" />
     <Compile Include="CJK\JISConvert.cs" />
+    <Compile Include="MidEast\CP1254.cs" />
+    <Compile Include="MidEast\CP1255.cs" />
+    <Compile Include="MidEast\CP1256.cs" />
+    <Compile Include="MidEast\CP28596.cs" />
+    <Compile Include="MidEast\CP28598.cs" />
+    <Compile Include="MidEast\CP28599.cs" />
+    <Compile Include="MidEast\CP38598.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Western\CP10000.cs" />
     <Compile Include="Western\CP10079.cs" />
