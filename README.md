@@ -56,6 +56,16 @@ Currently supported encodings include:
     * ISO-2022-JP
     * SHIFT-JIS
     * UHC
+  * Other Encodings
+    * ISO-8859-4
+    * ISO-8859-5
+    * KOI8-R
+    * KOI8-U
+    * Windows-874
+    * Windows-1251
+    * Windows-1257
+    * Windows-1258
+    * And many more...
 
 ## TODO
 
