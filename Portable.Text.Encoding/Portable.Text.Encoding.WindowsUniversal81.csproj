@@ -42,7 +42,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>portable.text.encoding.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>y
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
