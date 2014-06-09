@@ -63,6 +63,6 @@ using System.Reflection;
 //
 // If there have only been bug fixes, bump the Micro Version and/or the Build Number
 //    in the AssemblyFileVersion attribute.
-[assembly: AssemblyInformationalVersion ("0.5.0")]
-[assembly: AssemblyFileVersion ("0.5.0.0")]
-[assembly: AssemblyVersion ("0.5.0.0")]
+[assembly: AssemblyInformationalVersion ("0.6.0")]
+[assembly: AssemblyFileVersion ("0.6.0.0")]
+[assembly: AssemblyVersion ("0.6.0.0")]
