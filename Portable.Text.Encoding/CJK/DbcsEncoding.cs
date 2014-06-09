@@ -93,7 +93,7 @@ namespace Portable.Text
 		public override int GetMaxCharCount (int byteCount)
 		{
 			if (byteCount < 0)
-				throw new ArgumentOutOfRangeException("byteCount");
+				throw new ArgumentOutOfRangeException ("byteCount");
 
 			return byteCount;
 		}
