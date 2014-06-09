@@ -27,6 +27,9 @@ using System;
 namespace Portable.Text
 {
 	public abstract class Decoder
+	#if !STANDALONE
+		: System.Text.Decoder
+	#endif
 	{
 		DecoderFallback fallback = new DecoderReplacementFallback ();
 		DecoderFallbackBuffer fallback_buffer;
@@ -54,13 +57,20 @@ namespace Portable.Text
 			}
 		}
 
+		#if STANDALONE
 		// Get the number of characters needed to decode a buffer.
 		public abstract int GetCharCount (byte[] bytes, int index, int count);
 
 		// Get the characters that result from decoding a buffer.
 		public abstract int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex);
+		#endif
 
-		public virtual int GetCharCount (byte[] bytes, int index, int count, bool flush)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetCharCount (byte[] bytes, int index, int count, bool flush)
 		{
 			if (flush)
 				Reset ();
@@ -68,7 +78,12 @@ namespace Portable.Text
 			return GetCharCount (bytes, index, count);
 		}
 
-		public virtual int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, bool flush)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, bool flush)
 		{
 			CheckArguments (bytes, byteIndex, byteCount);
 			CheckArguments (chars, charIndex);
@@ -79,13 +94,23 @@ namespace Portable.Text
 			return GetChars (bytes, byteIndex, byteCount, chars, charIndex);
 		}
 
-		public virtual void Reset ()
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		void Reset ()
 		{
 			if (fallback_buffer != null)
 				fallback_buffer.Reset ();
 		}
 
-		public virtual void Convert (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		void Convert (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
 		{
 			CheckArguments (bytes, byteIndex, byteCount);
 

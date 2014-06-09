@@ -30,6 +30,9 @@ using System.Reflection;
 namespace Portable.Text
 {
 	public abstract class Encoding
+	#if !STANDALONE
+		: System.Text.Encoding
+	#endif
 	{
 		// Code page used by this encoding.
 		internal readonly int codePage;
@@ -158,11 +161,18 @@ namespace Portable.Text
 			return encoding != null && codePage == encoding.codePage && DecoderFallback.Equals (encoding.DecoderFallback) && EncoderFallback.Equals (encoding.EncoderFallback);
 		}
 
+		#if STANDALONE
 		// Get the number of characters needed to encode a character buffer.
 		public abstract int GetByteCount (char[] chars, int index, int count);
+		#endif
 
 		// Convenience wrappers for "GetByteCount".
-		public virtual int GetByteCount (string s)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetByteCount (string s)
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
@@ -177,7 +187,12 @@ namespace Portable.Text
 			}
 		}
 
-		public virtual int GetByteCount (char[] chars)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetByteCount (char[] chars)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
@@ -185,11 +200,18 @@ namespace Portable.Text
 			return GetByteCount (chars, 0, chars.Length);
 		}
 
+		#if STANDALONE
 		// Get the bytes that result from encoding a character buffer.
 		public abstract int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex);
+		#endif
 
 		// Convenience wrappers for "GetBytes".
-		public virtual int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
@@ -215,7 +237,12 @@ namespace Portable.Text
 			}
 		}
 
-		public virtual byte[] GetBytes (string s)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		byte[] GetBytes (string s)
 		{
 			if (s == null)
 				throw new ArgumentNullException ("s");
@@ -239,7 +266,12 @@ namespace Portable.Text
 			}
 		}
 
-		public virtual byte[] GetBytes (char[] chars, int index, int count)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		byte[] GetBytes (char[] chars, int index, int count)
 		{
 			int numBytes = GetByteCount (chars, index, count);
 			var bytes = new byte [numBytes];
@@ -249,7 +281,12 @@ namespace Portable.Text
 			return bytes;
 		}
 
-		public virtual byte[] GetBytes (char[] chars)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		byte[] GetBytes (char[] chars)
 		{
 			int numBytes = GetByteCount (chars, 0, chars.Length);
 			var bytes = new byte [numBytes];
@@ -259,11 +296,18 @@ namespace Portable.Text
 			return bytes;
 		}
 
+		#if STANDALONE
 		// Get the number of characters needed to decode a byte buffer.
 		public abstract int GetCharCount (byte[] bytes, int index, int count);
+		#endif
 
 		// Convenience wrappers for "GetCharCount".
-		public virtual int GetCharCount (byte[] bytes)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		int GetCharCount (byte[] bytes)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
@@ -271,11 +315,18 @@ namespace Portable.Text
 			return GetCharCount (bytes, 0, bytes.Length);
 		}
 
+		#if STANDALONE
 		// Get the characters that result from decoding a byte buffer.
 		public abstract int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex);
+		#endif
 
 		// Convenience wrappers for "GetChars".
-		public virtual char[] GetChars (byte[] bytes, int index, int count)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		char[] GetChars (byte[] bytes, int index, int count)
 		{
 			int numChars = GetCharCount (bytes, index, count);
 			char[] chars = new char [numChars];
@@ -283,7 +334,12 @@ namespace Portable.Text
 			return chars;
 		}
 
-		public virtual char[] GetChars (byte[] bytes)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		char[] GetChars (byte[] bytes)
 		{
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
@@ -295,13 +351,23 @@ namespace Portable.Text
 		}
 
 		// Get a decoder that forwards requests to this object.
-		public virtual Decoder GetDecoder ()
+		#if STANDALONE
+		public virtual Decoder
+		#else
+		public override System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new ForwardingDecoder (this);
 		}
 
 		// Get an encoder that forwards requests to this object.
-		public virtual Encoder GetEncoder ()
+		#if STANDALONE
+		public virtual Encoder
+		#else
+		public override System.Text.Encoder
+		#endif
+		GetEncoder ()
 		{
 			return new ForwardingEncoder (this);
 		}
@@ -439,7 +505,11 @@ namespace Portable.Text
 		}
 
 		// Get an encoding object for a specific web encoding name.
-		public static Encoding GetEncoding (string name)
+		public static
+		#if !STANDALONE
+		new
+		#endif
+		Encoding GetEncoding (string name)
 		{
 			// Validate the parameters.
 			if (name == null)
@@ -527,6 +597,7 @@ namespace Portable.Text
 			return DecoderFallback.GetHashCode () << 24 + EncoderFallback.GetHashCode () << 16 + codePage;
 		}
 
+		#if STANDALONE
 		// Get the maximum number of bytes needed to encode a
 		// specified number of characters.
 		public abstract int GetMaxByteCount (int charCount);
@@ -534,15 +605,26 @@ namespace Portable.Text
 		// Get the maximum number of characters needed to decode a
 		// specified number of bytes.
 		public abstract int GetMaxCharCount (int byteCount);
+		#endif
 
 		// Get the identifying preamble for this encoding.
-		public virtual byte[] GetPreamble ()
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		byte[] GetPreamble ()
 		{
 			return new byte[0];
 		}
 
 		// Decode a buffer of bytes into a string.
-		public virtual string GetString (byte[] bytes, int index, int count)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		string GetString (byte[] bytes, int index, int count)
 		{
 			return new string (GetChars (bytes, index, count));
 		}
@@ -605,7 +687,12 @@ namespace Portable.Text
 		}
 
 		// Get the IANA-preferred Web name for this encoding.
-		public virtual string WebName {
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		string WebName {
 			get { return web_name; }
 		}
 
@@ -647,7 +734,11 @@ namespace Portable.Text
 		}
 
 		// Get the standard big-endian Unicode encoding object.
-		public static Encoding BigEndianUnicode {
+		public static
+		#if !STANDALONE
+		new
+		#endif
+		Encoding BigEndianUnicode {
 			get {
 				if (bigEndianEncoding == null) {
 					lock (lockobj) {
@@ -700,7 +791,11 @@ namespace Portable.Text
 		}
 
 		// Get the standard UTF-8 encoding object.
-		public static Encoding UTF8 {
+		public static
+		#if !STANDALONE
+		new
+		#endif
+		Encoding UTF8 {
 			get {
 				if (utf8EncodingWithMarkers == null) {
 					lock (lockobj) {
@@ -716,7 +811,11 @@ namespace Portable.Text
 		}
 
 		// Get the standard little-endian Unicode encoding object.
-		public static Encoding Unicode {
+		public static
+		#if !STANDALONE
+		new
+		#endif
+		Encoding Unicode {
 			get {
 				if (unicodeEncoding == null) {
 					lock (lockobj) {

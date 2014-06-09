@@ -84,7 +84,13 @@ namespace Portable.Text {
 		}
 
 		// Get a decoder that handles a rolling Big5 state.
-		public override Decoder GetDecoder ()
+		public override
+		#if STANDALONE
+		Decoder
+		#else
+		System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new CP950Decoder (GetConvert ());
 		}

@@ -278,7 +278,13 @@ namespace Portable.Text
 		}
 
 		// Get a UTF32-specific decoder that is attached to this instance.
-		public override Decoder GetDecoder ()
+		public override
+		#if STANDALONE
+		Decoder
+		#else
+		System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new UTF32Decoder (bigEndian);
 		}

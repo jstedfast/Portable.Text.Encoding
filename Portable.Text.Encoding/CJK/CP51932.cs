@@ -104,12 +104,24 @@ namespace Portable.Text {
 			return byteCount;
 		}
 
-		public override Encoder GetEncoder ()
+		public override
+		#if STANDALONE
+		Encoder
+		#else
+		System.Text.Encoder
+		#endif
+		GetEncoder ()
 		{
 			return new CP51932Encoder (this);
 		}
 
-		public override Decoder GetDecoder ()
+		public override
+		#if STANDALONE
+		Decoder
+		#else
+		System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new CP51932Decoder ();
 		}

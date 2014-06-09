@@ -85,12 +85,24 @@ namespace Portable.Text {
 			return new GB18030Decoder ().GetChars (bytes, byteIndex, byteCount, chars, charIndex);
 		}
 
-		public override Encoder GetEncoder ()
+		public override
+		#if STANDALONE
+		Encoder
+		#else
+		System.Text.Encoder
+		#endif
+		GetEncoder ()
 		{
 			return new GB18030Encoder (this);
 		}
 
-		public override Decoder GetDecoder ()
+		public override
+		#if STANDALONE
+		Decoder
+		#else
+		System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new GB18030Decoder ();
 		}

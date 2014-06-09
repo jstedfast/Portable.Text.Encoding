@@ -861,13 +861,25 @@ namespace Portable.Text
 		}
 
 		// Get a UTF8-specific decoder that is attached to this instance.
-		public override Decoder GetDecoder ()
+		public override
+		#if STANDALONE
+		Decoder
+		#else
+		System.Text.Decoder
+		#endif
+		GetDecoder ()
 		{
 			return new UTF8Decoder (DecoderFallback);
 		}
 
 		// Get a UTF8-specific encoder that is attached to this instance.
-		public override Encoder GetEncoder ()
+		public override
+		#if STANDALONE
+		Encoder
+		#else
+		System.Text.Encoder
+		#endif
+		GetEncoder ()
 		{
 			return new UTF8Encoder (EncoderFallback, emitIdentifier);
 		}

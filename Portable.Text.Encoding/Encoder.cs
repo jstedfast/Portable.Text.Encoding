@@ -27,6 +27,9 @@ using System;
 namespace Portable.Text
 {
 	public abstract class Encoder
+	#if !STANDALONE
+		: System.Text.Encoder
+	#endif
 	{
 		EncoderFallback fallback = new EncoderReplacementFallback ();
 		EncoderFallbackBuffer fallback_buffer;
@@ -54,11 +57,13 @@ namespace Portable.Text
 			}
 		}
 
+		#if STANDALONE
 		// Get the number of bytes needed to encode a buffer.
 		public abstract int GetByteCount(char[] chars, int index, int count, bool flush);
 
 		// Get the bytes that result from decoding a buffer.
 		public abstract int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, bool flush);
+		#endif
 
 		public virtual void Reset ()
 		{
@@ -66,7 +71,12 @@ namespace Portable.Text
 				fallback_buffer.Reset ();
 		}
 
-		public virtual void Convert (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, int byteCount, bool flush, out int charsUsed, out int bytesUsed, out bool completed)
+		#if STANDALONE
+		public virtual
+		#else
+		public override
+		#endif
+		void Convert (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, int byteCount, bool flush, out int charsUsed, out int bytesUsed, out bool completed)
 		{
 			if (chars == null)
 				throw new ArgumentNullException ("chars");
