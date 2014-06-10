@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
@@ -121,11 +121,21 @@
     <Compile Include="UTF8Encoding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CJK\big5.table" />
-    <EmbeddedResource Include="CJK\gb18030.table" />
-    <EmbeddedResource Include="CJK\gb2312.table" />
-    <EmbeddedResource Include="CJK\jis.table" />
-    <EmbeddedResource Include="CJK\ks.table" />
+    <EmbeddedResource Include="CJK\big5.table">
+      <LogicalName>big5.table</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CJK\gb18030.table">
+      <LogicalName>gb18030.table</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CJK\gb2312.table">
+      <LogicalName>gb2312.table</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CJK\jis.table">
+      <LogicalName>jis.table</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CJK\ks.table">
+      <LogicalName>ks.table</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
