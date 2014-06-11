@@ -125,9 +125,8 @@ Portable.Text.Encoding.
 
 I think the best coarse of action is to follow the same overall design of the I18N assemblies - in other words: 
 create a new PCL project/assembly for each "region" (West, CJK, MidEast, Rare, Other). Once you've added all the
-sources (and tables for those that have them), changed the namespace from `System.Text` to `Portable.Text`, and
-set the PCL Profile to Profile78 (.NET 4.5, Windows Phone 8, Windows Store), just try building.
-If there aren't any errors, you're done!
+sources (and tables for those that have them) and changed the namespace from `System.Text` to `Portable.Text`,
+just try building. If there aren't any errors, you're done!
 
 ## Reporting Bugs
 
