@@ -585,7 +585,7 @@ namespace Portable.Text
 			// has provided its own code page handler.
 			type = Type.GetType (encodingName);
 			if (type != null)
-				return (Encoding) Activator.CreateInstance (type) ;
+				return (Encoding) Activator.CreateInstance (type);
 
 			// We have no idea how to handle this encoding name.
 			throw new ArgumentException (string.Format ("Encoding name '{0}' not supported", name), "name");
