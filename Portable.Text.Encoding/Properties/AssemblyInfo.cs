@@ -3,7 +3,7 @@
 //
 // Author: Jeffrey Stedfast <jeff@xamarin.com>
 //
-// Copyright (c) 2014 Xamarin Inc.
+// Copyright (c) 2014-2015 Xamarin Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ using System.Reflection;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Xamarin Inc.")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Copyright © 2014 Xamarin Inc. (www.xamarin.com)")]
+[assembly: AssemblyCopyright ("Copyright © 2014-2015 Xamarin Inc. (www.xamarin.com)")]
 [assembly: AssemblyTrademark ("Xamarin Inc.")]
 [assembly: AssemblyCulture ("")]
 
@@ -63,6 +63,6 @@ using System.Reflection;
 //
 // If there have only been bug fixes, bump the Micro Version and/or the Build Number
 //    in the AssemblyFileVersion attribute.
-[assembly: AssemblyInformationalVersion ("0.7.0")]
-[assembly: AssemblyFileVersion ("0.7.0.0")]
-[assembly: AssemblyVersion ("0.7.0.0")]
+[assembly: AssemblyInformationalVersion ("0.8.0")]
+[assembly: AssemblyFileVersion ("0.8.0.0")]
+[assembly: AssemblyVersion ("0.8.0.0")]
