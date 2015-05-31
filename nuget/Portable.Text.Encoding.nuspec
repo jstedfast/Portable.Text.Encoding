@@ -19,6 +19,6 @@ Platforms such as Windows Phone currently do not provide support for text encodi
         <tags>pcl net45 win8 win81 wp81 wpa81 monodroid monotouch xamarin</tags>
     </metadata>
     <files>
-        <file src="..\bin\Release\Profile111\Portable.Text.Encoding.dll" target="lib\portable-net45+win8+wp81+monoandroid10+monotouch10+xamarinios10\Portable.Text.Encoding.dll" />
+        <file src="..\bin\Release\Profile111\Portable.Text.Encoding.dll" target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Text.Encoding.dll" />
     </files>
 </package>
