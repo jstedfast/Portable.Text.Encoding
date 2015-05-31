@@ -21,7 +21,6 @@ Platforms such as Windows Phone currently do not provide support for text encodi
         <tags>pcl win8 win81 wp81 wpa81 xamarin</tags>
     </metadata>
     <files>
-        <file src="..\bin\Release\Profile7\Portable.Text.Encoding.dll" target="lib\portable-net45+wp8+win8\Portable.Text.Encoding.dll" />
-        <file src="..\bin\Release\Profile111\Portable.Text.Encoding.dll" target="lib\wpa81\Portable.Text.Encoding.dll" />
+        <file src="..\bin\Release\Profile111\Portable.Text.Encoding.dll" target="lib\portable-net45+win8+wp81+monoandroid10+monotouch10+xamarinios10\Portable.Text.Encoding.dll" />
     </files>
 </package>
