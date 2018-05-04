@@ -26,7 +26,8 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace Portable.Text {
+namespace Portable.Text
+{
 	// This class assists encoding classes for the large CJK character
 	// sets by providing pointer access to table data in the resource
 	// section of the current assembly.
@@ -41,55 +42,62 @@ namespace Portable.Text {
 		Stream stream;
 
 		// Load a code table from the resource section of this assembly.
-		public CodeTable (string name)
+		public CodeTable(string name)
 		{
+#if NETFX_40
+			stream = typeof(CodeTable).Assembly.GetManifestResourceStream(name);
+#else
 			stream = typeof (CodeTable).GetTypeInfo ().Assembly.GetManifestResourceStream (name);
+#endif
 
 			if (stream == null)
-				throw new NotSupportedException ("Encoding not supported.");
+				throw new NotSupportedException("Encoding not supported.");
 		}
 
 		// Implement the IDisposable interface.
-		public void Dispose ()
+		public void Dispose()
 		{
-			if (stream != null) {
-				stream.Dispose ();
+			if (stream != null)
+			{
+				stream.Dispose();
 				stream = null;
 			}
 		}
 
-		public byte[] GetSection (int num)
+		public byte[] GetSection(int num)
 		{
 			// If the table has been disposed, then bail out.
 			if (stream == null)
 				return null;
 
 			// Scan through the stream looking for the section.
-			byte[] header = new byte [8];
+			byte[] header = new byte[8];
 			long length = stream.Length;
 			int sectNum, sectLen;
 			long posn = 0;
 
-			while ((posn + 8) <= length) {
+			while ((posn + 8) <= length)
+			{
 				// Read the next header block.
 				stream.Position = posn;
-				if (stream.Read (header, 0, 8) != 8)
+				if (stream.Read(header, 0, 8) != 8)
 					break;
 
 				// Decode the fields in the header block.
-				sectNum = ((int)(header [0])) |
-					(((int)(header [1])) << 8) |
-					(((int)(header [2])) << 16) |
-					(((int)(header [3])) << 24);
-				sectLen = ((int)(header [4])) |
-					(((int)(header [5])) << 8) |
-					(((int)(header [6])) << 16) |
-					(((int)(header [7])) << 24);
+				sectNum = ((int)(header[0])) |
+					(((int)(header[1])) << 8) |
+					(((int)(header[2])) << 16) |
+					(((int)(header[3])) << 24);
+				sectLen = ((int)(header[4])) |
+					(((int)(header[5])) << 8) |
+					(((int)(header[6])) << 16) |
+					(((int)(header[7])) << 24);
 
 				// Is this the section we are looking for?
-				if (sectNum == num) {
-					byte[] buf = new byte [sectLen];
-					if (stream.Read (buf, 0, sectLen) != sectLen)
+				if (sectNum == num)
+				{
+					byte[] buf = new byte[sectLen];
+					if (stream.Read(buf, 0, sectLen) != sectLen)
 						break;
 
 					return buf;
