@@ -19,7 +19,7 @@ namespace Portable.Text
 			public readonly long GEnd;
 			public readonly bool Dummy; // This range is actually not usable.
 
-			public GB18030Map (int ustart, int uend, long gstart, long gend, bool dummy)
+			public GB18030Map(int ustart, int uend, long gstart, long gend, bool dummy)
 			{
 				this.UStart = ustart;
 				this.UEnd = uend;
@@ -29,41 +29,46 @@ namespace Portable.Text
 			}
 		}
 
-		GB18030Source ()
+		GB18030Source()
 		{
 		}
 
 		static readonly byte[] gbx2uni;
 		static readonly byte[] uni2gbx;
 
-		static GB18030Source ()
+		static GB18030Source()
 		{
+#if NETFX_40
+			var assembly = typeof(GB18030Source).Assembly;
+#else
 			var assembly = typeof (GB18030Source).GetTypeInfo ().Assembly;
+#endif
 
-			using (var stream = assembly.GetManifestResourceStream ("gb18030.table")) {
+			using (var stream = assembly.GetManifestResourceStream("gb18030.table"))
+			{
 				var buf = new byte[4];
 				int size;
 
-				stream.Read (buf, 0, buf.Length);
+				stream.Read(buf, 0, buf.Length);
 				size = (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + (buf[3]);
 
 				gbx2uni = new byte[size];
-				stream.Read (gbx2uni, 0, size);
+				stream.Read(gbx2uni, 0, size);
 
-				stream.Read (buf, 0, buf.Length);
+				stream.Read(buf, 0, buf.Length);
 				size = (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + (buf[3]);
 
 				uni2gbx = new byte[size];
-				stream.Read (uni2gbx, 0, size);
+				stream.Read(uni2gbx, 0, size);
 			}
 		}
 
-		static readonly long gbxBase = FromGBXRaw (0x81, 0x30, 0x81, 0x30, false);
-		static readonly long gbxSuppBase = FromGBXRaw (0x90, 0x30, 0x81, 0x30, false);
+		static readonly long gbxBase = FromGBXRaw(0x81, 0x30, 0x81, 0x30, false);
+		static readonly long gbxSuppBase = FromGBXRaw(0x90, 0x30, 0x81, 0x30, false);
 
 		// See http://icu.sourceforge.net/docs/papers/gb18030.html
 		// and referenced XML mapping table.
-		static readonly GB18030Map [] ranges = {
+		static readonly GB18030Map[] ranges = {
 			// rawmap: 0x0080-0x0451
 			new GB18030Map (0x0452, 0x200F, FromGBXRaw (0x81, 0x30, 0xD3, 0x30, false), FromGBXRaw (0x81, 0x36, 0xA5, 0x31, false), false),
 			// rawmap: 0x2010-0x2642
@@ -99,31 +104,32 @@ namespace Portable.Text
 			new GB18030Map (0xFFE6, 0xFFFF, FromGBXRaw (0x84, 0x31, 0xA2, 0x34, false), FromGBXRaw (0x84, 0x31, 0xA4, 0x39, false), false),
 		};
 
-		public static void Unlinear (byte [] bytes, int start, long gbx)
+		public static void Unlinear(byte[] bytes, int start, long gbx)
 		{
-			fixed (byte* bptr = bytes) {
-				Unlinear (bptr + start, gbx);
+			fixed (byte* bptr = bytes)
+			{
+				Unlinear(bptr + start, gbx);
 			}
 		}
 
-		public static unsafe void Unlinear (byte* bytes, long gbx)
+		public static unsafe void Unlinear(byte* bytes, long gbx)
 		{
-			bytes [3] = (byte) (gbx % 10 + 0x30);
+			bytes[3] = (byte)(gbx % 10 + 0x30);
 			gbx /= 10;
-			bytes [2] = (byte) (gbx % 126 + 0x81);
+			bytes[2] = (byte)(gbx % 126 + 0x81);
 			gbx /= 126;
-			bytes [1] = (byte) (gbx % 10 + 0x30);
+			bytes[1] = (byte)(gbx % 10 + 0x30);
 			gbx /= 10;
-			bytes [0] = (byte) (gbx + 0x81);
+			bytes[0] = (byte)(gbx + 0x81);
 		}
 
 		// negative (invalid) or positive (valid)
-		public static long FromGBX (byte [] bytes, int start)
+		public static long FromGBX(byte[] bytes, int start)
 		{
-			byte b1 = bytes [start];
-			byte b2 = bytes [start + 1];
-			byte b3 = bytes [start + 2];
-			byte b4 = bytes [start + 3];
+			byte b1 = bytes[start];
+			byte b2 = bytes[start + 1];
+			byte b3 = bytes[start + 2];
+			byte b4 = bytes[start + 3];
 
 			if (b1 < 0x81 || b1 == 0xFF)
 				return -1;
@@ -135,57 +141,61 @@ namespace Portable.Text
 				return -4;
 
 			if (b1 >= 0x90)
-				return FromGBXRaw (b1, b2, b3, b4, true);
+				return FromGBXRaw(b1, b2, b3, b4, true);
 
-			long linear = FromGBXRaw (b1, b2, b3, b4, false);
+			long linear = FromGBXRaw(b1, b2, b3, b4, false);
 
 			long rawOffset = 0;
 			long startIgnore = 0;
 
-			foreach (var range in ranges) {
+			foreach (var range in ranges)
+			{
 				if (linear < range.GStart)
-					return ToUcsRaw ((int)(linear - startIgnore + rawOffset));
+					return ToUcsRaw((int)(linear - startIgnore + rawOffset));
 
 				if (linear <= range.GEnd)
 					return linear - gbxBase - range.GStart + range.UStart;
 
-				if (range.GStart != 0) {
+				if (range.GStart != 0)
+				{
 					rawOffset += range.GStart - startIgnore;
 					startIgnore = range.GEnd + 1;
 				}
 			}
 
-//			return ToUcsRaw ((int) (linear - gbxBase));
-			throw new Exception (string.Format ("GB18030 INTERNAL ERROR (should not happen): GBX {0:x02} {1:x02} {2:x02} {3:x02}", b1, b2, b3, b4));
+			//			return ToUcsRaw ((int) (linear - gbxBase));
+			throw new Exception(string.Format("GB18030 INTERNAL ERROR (should not happen): GBX {0:x02} {1:x02} {2:x02} {3:x02}", b1, b2, b3, b4));
 		}
 
-		public static long FromUCSSurrogate (int cp)
+		public static long FromUCSSurrogate(int cp)
 		{
 			return cp + gbxSuppBase;
 		}
 
-		public static long FromUCS (int cp)
+		public static long FromUCS(int cp)
 		{
 			long startIgnore = 0x80;
 			long rawOffset = 0;
 
-			foreach (var range in ranges) {
+			foreach (var range in ranges)
+			{
 				if (cp < range.UStart)
-					return ToGbxRaw ((int) (cp - startIgnore + rawOffset));
+					return ToGbxRaw((int)(cp - startIgnore + rawOffset));
 
 				if (cp <= range.UEnd)
 					return cp - range.UStart + range.GStart;
 
-				if (range.GStart != 0) {
+				if (range.GStart != 0)
+				{
 					rawOffset += range.UStart - startIgnore;
 					startIgnore = range.UEnd + 1;
 				}
 			}
 
-			throw new Exception (String.Format ("GB18030 INTERNAL ERROR (should not happen): UCS {0:x06}", cp));
+			throw new Exception(String.Format("GB18030 INTERNAL ERROR (should not happen): UCS {0:x06}", cp));
 		}
 
-		static long FromGBXRaw (byte b1, byte b2, byte b3, byte b4, bool supp)
+		static long FromGBXRaw(byte b1, byte b2, byte b3, byte b4, bool supp)
 		{
 			// 126 = 0xFE - 0x80
 			return (((b1 - (supp ? 0x90 : 0x81)) * 10 +
@@ -194,12 +204,12 @@ namespace Portable.Text
 				b4 - 0x30 + (supp ? 0x10000 : 0);
 		}
 
-		static int ToUcsRaw (int idx)
+		static int ToUcsRaw(int idx)
 		{
 			return gbx2uni[idx * 2] * 0x100 + gbx2uni[idx * 2 + 1];
 		}
 
-		static long ToGbxRaw (int idx)
+		static long ToGbxRaw(int idx)
 		{
 			if (idx < 0 || idx * 2 + 1 >= uni2gbx.Length)
 				return -1;
